@@ -11,14 +11,38 @@ module.exports = function(app) {
       res.json(friends);
     });
 
-    app.post("/api/friendss", function(req, res) {
-        // Note the code here. Our "server" will respond to requests and let users know if they have a table or not.
-        // It will do this by sending out the value "true" have a table
-        // req.body is available since we're using the body parsing middleware
-        if (friends.length < 5) {
-          friends.push(req.body);
-          res.json(true);
+    app.post('/api/friends', function(req,res){
+      //grabs the new friend's scores to compare with friends in friendList array
+      var newFriendScores = req.body.scores;
+      var scoresArray = [];
+      var friendCount = 0;
+      var bestMatch = 0;
+  
+      //runs through all current friends in list
+      for(var i=0; i<friends.length; i++){
+        var scoresDiff = 0;
+        //run through scores to compare friends
+        for(var j=0; j<newFriendScores.length; j++){
+          scoresDiff += (Math.abs(parseInt(friends[i].scores[j]) - parseInt(newFriendScores[j])));
         }
-      });
+  
+        //push results into scoresArray
+        scoresArray.push(scoresDiff);
+      }
+  
+      //after all friends are compared, find best match
+      for(var i=0; i<scoresArray.length; i++){
+        if(scoresArray[i] <= scoresArray[bestMatch]){
+          bestMatch = i;
+        }
+      }
+  
+      //return bestMatch data
+      var bff = friends[bestMatch];
+      res.json(bff);
+  
+      //pushes new submission into the friendsList array
+      friends.push(req.body);
+    });
 
 }; 
