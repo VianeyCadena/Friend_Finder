@@ -4,7 +4,7 @@ Do you feel alone? Do you need new friends? If your answer as "yes" this simply 
 Friend Finder is a simply date app in wich you answer 10 question about your feelings, the question are for multiple choise of numeric options. When you submit the survey, the app match you with a friend that has a similar personality to you.
 
 ## Test in live
-https://obscure-harbor-54500.herokuapp.com/survey
+https://obscure-harbor-54500.herokuapp.com
 
 ## Getting Started
 ###### User
